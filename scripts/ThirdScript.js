@@ -17,9 +17,12 @@ let mFinalValue = 0;
 //Main Loop//
 
 CreatePHItems();
-let menuString = "";
+let menuString = new String();
+for (var i = 0; i < mItemsContainer.length; i++) {
+    menuString += i +") " + mItemsContainer[i].itemName + " Value: $" + mItemsContainer[i].itemValue + "\n";
+}
 
-let itemValue = mItemsContainer[parseInt(prompt("Hello User! \nWrite the number of the item you want to use \n"))].itemValue;
+let itemValue = mItemsContainer[parseInt(prompt("Hello User! \nWrite the number of the item you want to use \n" + menuString))].itemValue;
 Calculate(itemValue);
 mContinue = confirm("AddAnotherProduct?");
 
@@ -51,9 +54,6 @@ function Installments(totalInstallments) {
 
         //We divide the installments and use Math.Round to truncate up to two decimals.
         mFinalValue = Math.round((mFinalValue /= totalInstallments) * 100) / 100;
-    }
-    else {
-        mFinalValue = totalInstallments;
     }
 }
 
