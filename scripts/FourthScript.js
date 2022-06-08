@@ -29,7 +29,6 @@ for (var i = 0; i < mItemsContainer.length; i++) {
 while (mContinue != false) {
     try{
         let mPromtMessage = mCartContanier.length === 0 ? "Hello User! \nWrite the number of the item you want to buy" : "Cart:\n" + CreateCartInventory() + "\nSelect your next product";
-
         let item = mItemsContainer[parseInt(prompt(mPromtMessage + "\n" + menuString))];
         (item != undefined) && mCartContanier.push(item);
 
@@ -53,10 +52,6 @@ alert("You have to pay " + mFinalValue + " during " + mInstallments + " Months."
 let div = document.getElementById("testDiv");
 let paragraph = document.getElementById("testP");
 let link = document.getElementById("testLink");
-
-//Test event. These two are the best, we don't want html to handle and/or know events
-link.addEventListener("click", OnClick);
-link.onclick = () => { console.log("Arrow funcion on event"); }
 
 //Shutdown
 localStorage.removeItem('CartArray');
@@ -132,6 +127,25 @@ function PHItem(itemName, itemValue) {
     this.itemValue = itemValue;
 }
 
+//---------------------
+//Testing// Stuff we don't fully implement on the code beacuse the final proyect isn't final yet. So we really can't give these thing an use.
+//---------------------
+
+//Test Spread
+function addition(...numberArray) {
+    return testReduction = numberArray.reduce((prev, current) => prev + current, 0);
+}
+console.log(addition(1, 2, 3, 4));
+
+//Test Array Destructuring
+const [, second, third] = mItemsContainer;
+console.log(second.itemValue);
+console.log(third.itemName);
+
+//Test event. These two are the best, we don't want html to handle and/or know events
+link.addEventListener("click", OnClick);
+link.onclick = () => { console.log("Arrow funcion on event"); }
+
 
 //---------------------
 //Event Handlers//
@@ -139,3 +153,5 @@ function PHItem(itemName, itemValue) {
 function OnClick(){
     console.log("Button Clicked!");
 }
+
+
