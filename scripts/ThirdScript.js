@@ -53,6 +53,24 @@ paragraph.append(h1);
 link.addEventListener("click", OnClick);
 link.onclick = () => { console.log("Arrow funcion on event"); }
 
+//Test storage
+//Local -> stored on browser
+//Session -> stored until window is closed
+localStorage.setItem('testStorage', true);
+sessionStorage.setItem('testSessionStorage', 99998);
+
+let local = localStorage.getItem('testStorage');
+let session = sessionStorage.getItem('testSessionStorage');
+console.log(local);
+console.log(session);
+
+const productTest = JSON.stringify({ id: 2, product: "Rice" });
+localStorage.setItem("product", productTest);
+
+console.log(localStorage.getItem('product'));
+console.log(JSON.parse(localStorage.getItem('product')).product);
+
+
 //window.close();
 
 //---------------------
