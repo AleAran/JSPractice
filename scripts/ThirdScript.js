@@ -5,7 +5,7 @@
 //Item Selection. 
 
 
-const INTEREST_RATE = 5.04;
+/*const INTEREST_RATE = 5.04;
 
 const mItemsContainer = [];
 
@@ -36,8 +36,18 @@ mInstallments = parseInt(prompt("In how many Installments?"));
 Installments(mInstallments);
 
 alert("You have to pay " + mFinalValue + " during " + mInstallments + " Months.");
+*/
+let div = document.getElementById("testDiv");
+let paragraph = document.getElementById("testP");
 
-window.close();
+ // we can get and manipulate the content here
+console.log(div.innerHTML);
+let h1 = document.createElement("h1");
+h1.innerHTML = "<h1>Created H1</h1>";
+paragraph.innerHTML = "<h2>Created H2</h2>";
+
+paragraph.append(h1);
+//window.close();
 
 //---------------------
 //Functions//
