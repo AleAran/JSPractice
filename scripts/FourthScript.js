@@ -103,7 +103,8 @@ function CreateCartInventory(){
 
 function GetPHItems(){
     try {
-        return localStorage.getItem(JSON.parse('ItemArray'));
+        const itemArray = JSON.parse(localStorage.getItem('ItemArray'));
+        return itemArray;
 
     } catch (e) {
         console.log(e);
@@ -113,7 +114,8 @@ function GetPHItems(){
 
 function GetCart(){
     try {
-        return localStorage.getItem(JSON.parse('CartArray'));
+        const cartArray = JSON.parse(localStorage.getItem('CartArray'));
+        return cartArray;
 
     } catch (e) {
         console.log(e);
