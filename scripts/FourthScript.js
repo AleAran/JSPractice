@@ -1,5 +1,7 @@
 // JavaScript source code
 
+//---------------------
+//Member declaration//
 const INTEREST_RATE = 5.04;
 
 let mContinue;
@@ -11,24 +13,34 @@ const mCartContanier = GetCart() || [];
 
 
 //---------------------
-//Main Loop//
+//Init//
 
-//CreatePHItems if needed
 mItemsContainer.length === 0 && CreatePHItems();
 
 let menuString = new String();
 for (var i = 0; i < mItemsContainer.length; i++) {
-    menuString += i +") " + mItemsContainer[i].itemName + " Value: $" + mItemsContainer[i].itemValue + "\n";
+    menuString += i + ") " + mItemsContainer[i].itemName + " Value: $" + mItemsContainer[i].itemValue + "\n";
 }
 
-let item = mItemsContainer[parseInt(prompt("Hello User! \nWrite the number of the item you want to use \n" + menuString))];
-mCartContanier.push(item);
-mContinue = confirm("AddAnotherProduct?");
+
+//---------------------
+//Main Loop//
 
 while (mContinue != false) {
-    let item = mItemsContainer[parseInt(prompt("Select your next product"))].item;
-    mCartContanier.push(item);
-    mContinue = confirm("AddAnotherProduct?");
+    try{
+        let mPromtMessage = mCartContanier.length === 0 ? "Hello User! \nWrite the number of the item you want to buy" : "Cart:\n" + CreateCartInventory() + "\nSelect your next product";
+
+        let item = mItemsContainer[parseInt(prompt(mPromtMessage + "\n" + menuString))];
+        (item != undefined) && mCartContanier.push(item);
+
+        localStorage.setItem('CartArray', JSON.stringify(mCartContanier));
+
+        mContinue = confirm("AddAnotherProduct?");
+    } catch (e)
+    {
+        console.log(e);
+        alert("Invalid Item selected!\n Chose another");
+    }
 }
 
 Calculate();
@@ -46,7 +58,10 @@ let link = document.getElementById("testLink");
 link.addEventListener("click", OnClick);
 link.onclick = () => { console.log("Arrow funcion on event"); }
 
+//Shutdown
+localStorage.removeItem('CartArray');
 window.close();
+
 
 //---------------------
 //Functions//
@@ -68,25 +83,44 @@ function Installments(totalInstallments) {
     }
 }
 
-function CreatePHItems()
-{
+function CreatePHItems(){
     const firstItem = new PHItem("Lechuga", 200);
     const secondItem = new PHItem("Tomate", 100);
     const thirdItem = new PHItem("Zanahoria", 50);
 
     mItemsContainer.push(firstItem, secondItem, thirdItem);
-    localStorage.setItem('ItemArray', mItemsContainer);
+    localStorage.setItem('ItemArray', JSON.stringify(mItemsContainer));
 }
 
-function GetPHItems()
-{
-    return localStorage.getItem('ItemArray');
+function CreateCartInventory(){
+    let cartString = new String();
+    for (var i = 0; i < mCartContanier.length; i++) {
+        cartString += "- " + mCartContanier[i].itemName + " Value: $" + mCartContanier[i].itemValue + "\n";
+    }
+
+    return cartString;
 }
 
-function GetCart()
-{
-    return localStorage.getItem('CartArray');
+function GetPHItems(){
+    try {
+        return localStorage.getItem(JSON.parse('ItemArray'));
+
+    } catch (e) {
+        console.log(e);
+        return undefined;
+    }
 }
+
+function GetCart(){
+    try {
+        return localStorage.getItem(JSON.parse('CartArray'));
+
+    } catch (e) {
+        console.log(e);
+        return undefined;
+    }
+}
+
 
 //---------------------
 //Constructors//
@@ -95,6 +129,7 @@ function PHItem(itemName, itemValue) {
     this.itemName = itemName;
     this.itemValue = itemValue;
 }
+
 
 //---------------------
 //Event Handlers//
