@@ -39,14 +39,20 @@ alert("You have to pay " + mFinalValue + " during " + mInstallments + " Months."
 */
 let div = document.getElementById("testDiv");
 let paragraph = document.getElementById("testP");
+let link = document.getElementById("testLink");
 
  // we can get and manipulate the content here
 console.log(div.innerHTML);
 let h1 = document.createElement("h1");
-h1.innerHTML = "<h1>Created H1</h1>";
-paragraph.innerHTML = "<h2>Created H2</h2>";
+h1.innerHTML = "<h1>Created H1 by createElement</h1>";
+paragraph.innerHTML += "<h2>Created H2 by addition</h2>";
 
 paragraph.append(h1);
+
+//Test event. These two are the best, we don't want html to handle and/or know events
+link.addEventListener("click", OnClick);
+link.onclick = () => { console.log("Arrow funcion on event"); }
+
 //window.close();
 
 //---------------------
@@ -82,4 +88,11 @@ function CreatePHItems()
 function PHItem(itemName, itemValue) {
     this.itemName = itemName;
     this.itemValue = itemValue;
+}
+
+//---------------------
+//Event Handlers//
+
+function OnClick(){
+    console.log("Button Clicked!");
 }
