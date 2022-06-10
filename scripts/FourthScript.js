@@ -1,5 +1,15 @@
 // JavaScript source code
 
+//Ok... Time to start giving this a proper store shape.
+
+/* Things to add logic for:
+1) Html pages and manipulation, once we start working on it, we are going to make it behave fancy. -> This is priority
+2) Product Management -> Add/remove items from store if you are a Manager -> Maybe we can add some sort of library for this? Nothing fancy, but also nothing lazy.
+3) Recommended Items -> Don't go crazy here with the scope, just display the items with most sells.
+4) Checkout screen -> This one is simple, we do have the work done, but we want to have a proper screen for this one.
+5) Filter product types + searcher... I'm 90% sure we do have some sort of library. Am I able to do most of the work?. Yeah, but it might be best for the interest of the project to use more of these things, this isn't gamedev, was told that here we do not to create everthing from scratch.
+6) Multi file implementation, we don't want everything in one js file, that's a nono thing to do.*/
+
 //---------------------
 //Member declaration//
 const INTEREST_RATE = 5.04;
@@ -47,7 +57,8 @@ Calculate();
 mInstallments = parseInt(prompt("In how many Installments?"));
 Installments(mInstallments);
 
-alert("You have to pay " + mFinalValue + " during " + mInstallments + " Months.");
+Swal.fire({ position: 'center', icon: 'success', title: 'You have to pay ' + mFinalValue + ' during ' + mInstallments + ' Months.'});
+//alert("You have to pay " + mFinalValue + " during " + mInstallments + " Months.");
 
 let div = document.getElementById("testDiv");
 let paragraph = document.getElementById("testP");
@@ -55,7 +66,7 @@ let link = document.getElementById("testLink");
 
 //Shutdown
 localStorage.removeItem('CartArray');
-window.close();
+//window.close();
 
 
 //---------------------
@@ -128,7 +139,7 @@ function PHItem(itemName, itemValue) {
 }
 
 //---------------------
-//Testing// Stuff we don't fully implement on the code beacuse the final proyect isn't final yet. So we really can't give these thing an use.
+//Testing// Stuff we don't fully implement on the code beacuse the final proyect isn't final yet. So we really can't give these things an use.
 //---------------------
 
 //Test Spread
@@ -146,12 +157,9 @@ console.log(third.itemName);
 link.addEventListener("click", OnClick);
 link.onclick = () => { console.log("Arrow funcion on event"); }
 
-
 //---------------------
 //Event Handlers//
 
 function OnClick(){
     console.log("Button Clicked!");
 }
-
-
